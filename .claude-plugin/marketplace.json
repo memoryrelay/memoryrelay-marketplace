@@ -1,0 +1,23 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "memoryrelay",
+  "description": "MemoryRelay plugins for Claude Code — persistent long-term memory with auto-session, auto-recall, auto-capture, and privacy filtering",
+  "owner": {
+    "name": "MemoryRelay",
+    "email": "support@memoryrelay.ai"
+  },
+  "plugins": [
+    {
+      "name": "memoryrelay",
+      "description": "Seamless long-term memory for Claude Code — auto-session, auto-recall, auto-capture with privacy filtering via MemoryRelay API. Includes 4 automation hooks, 1 intelligence skill, and 20 slash commands covering all 42 MCP tools.",
+      "version": "1.0.0",
+      "author": {
+        "name": "MemoryRelay"
+      },
+      "category": "productivity",
+      "tags": ["memory", "persistence", "context", "recall", "ai-memory"],
+      "homepage": "https://memoryrelay.ai",
+      "source": "./plugins/memoryrelay"
+    }
+  ]
+}
