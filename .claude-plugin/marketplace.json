@@ -1,7 +1,7 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "memoryrelay",
-  "description": "MemoryRelay plugins for Claude Code — persistent long-term memory with auto-session, auto-recall, auto-capture, and privacy filtering",
+  "description": "MemoryRelay plugins for Claude Code: pinned ICM context and repository memories for every session, with read and outcome reports and a privacy filter",
   "owner": {
     "name": "MemoryRelay",
     "email": "support@memoryrelay.ai"
@@ -9,15 +9,26 @@
   "plugins": [
     {
       "name": "memoryrelay",
-      "description": "Seamless long-term memory for Claude Code — auto-session, auto-recall, auto-capture with privacy filtering via MemoryRelay API. Includes 4 automation hooks, 1 intelligence skill, and 20 slash commands covering all 42 MCP tools.",
-      "version": "1.0.0",
+      "description": "MemoryRelay for Claude Code: loads the repository's bound ICM context and its memories at session start, asks for the read and outcome report at stop, stores durable findings after a compaction, and keeps secrets out of stored memories. Connects to https://api.memoryrelay.net/mcp with MEMORYRELAY_API_KEY. Source: memoryrelay/api plugins/memoryrelay.",
+      "version": "2.0.0",
       "author": {
         "name": "MemoryRelay"
       },
       "category": "productivity",
-      "tags": ["memory", "persistence", "context", "recall", "ai-memory"],
+      "tags": [
+        "memory",
+        "icm",
+        "context",
+        "mcp",
+        "ai-memory"
+      ],
       "homepage": "https://memoryrelay.ai",
-      "source": "./plugins/memoryrelay"
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/memoryrelay/api.git",
+        "path": "plugins/memoryrelay",
+        "ref": "main"
+      }
     }
   ]
 }
