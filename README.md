@@ -1,35 +1,28 @@
 # MemoryRelay Plugin Marketplace
 
-A plugin marketplace for [Claude Code](https://claude.ai/code) providing persistent long-term memory via [MemoryRelay](https://memoryrelay.ai).
+A plugin marketplace for [Claude Code](https://claude.com/claude-code) providing persistent context and memory via [MemoryRelay](https://memoryrelay.ai).
 
 ## Installation
 
-1. Add the marketplace:
-```
-/plugin add-marketplace memoryrelay/memoryrelay-marketplace
-```
-
-2. Install the plugin:
-```
-/plugin install memoryrelay@memoryrelay
+```bash
+claude plugin marketplace add memoryrelay/memoryrelay-marketplace
+claude plugin install memoryrelay@memoryrelay
 ```
 
-## Available Plugins
+Inside a session: `/plugin marketplace add memoryrelay/memoryrelay-marketplace`, then `/plugin install memoryrelay@memoryrelay`.
+
+## Available plugins
 
 ### memoryrelay
 
-Seamless long-term memory for Claude Code. Automatically manages sessions, recalls relevant context, captures important information, and filters sensitive content.
+Source: [`memoryrelay/api` → `plugins/memoryrelay`](https://github.com/memoryrelay/api/tree/main/plugins/memoryrelay) (this marketplace lists it; it no longer carries a copy).
 
-**What it provides:**
-- **4 Hooks** — SessionStart (auto-session), Stop (session cleanup), PreCompact (context rescue), PreToolUse (privacy filter)
-- **1 Skill** — `memory-awareness` for intelligent auto-recall and auto-capture
-- **20 Commands** — Full coverage of all 42 MemoryRelay MCP tools (memory, session, decision, pattern, entity, project, agent)
-- **MCP Server** — Bundled `memoryrelay-mcp` configuration
+- **Hooks**: SessionStart (the repository's bound ICM context through `icm_context_for`, then `memory_search` in the repository's namespace), Stop (asks once per context receipt for `icm_report_reads` and `icm_report_outcome`), PreToolUse (privacy filter on `memory_store` and `memory_update`). Node scripts, so they run on Windows, macOS and Linux.
+- **Skill**: `memory-awareness`.
+- **Commands**: `/memoryrelay:memory-search`, `memory-store`, `memory-list`, `memory-get`, `memory-update`, `memory-delete`, `memory-entity`, `memory-agent`, `memory-health`, `icm-context`, `icm-search`, `icm-report`.
+- **MCP server**: the remote server `https://api.memoryrelay.net/mcp` (Streamable HTTP).
 
-**Requirements:**
-- `memoryrelay-mcp` npm package installed globally (`npm install -g memoryrelay-mcp`)
-- `MEMORYRELAY_API_KEY` environment variable set
-- `jq` and `curl` available in PATH
+**Requirements**: `MEMORYRELAY_API_KEY` set where Claude Code starts (scopes `icm:context`, `icm:observe`, `read`, `write`), and Node.js on the `PATH`. Docs: [Connect an agent](https://docs.memoryrelay.ai/connect-an-agent#the-claude-code-plugin).
 
 ## License
 
